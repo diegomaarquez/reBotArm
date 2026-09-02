@@ -9,7 +9,8 @@ body,
 #main-content,
 .page,
 .page-content {
-  background-color: #121417 !important;
+  background: linear-gradient(135deg, #12180A 0%, #1D2614 48%, #121417 100%) !important;
+  background-attachment: fixed !important;
   color: #E2E8F0 !important;
 }
 
@@ -294,7 +295,7 @@ footer.site-footer {
 
 @media (max-width: 66rem) {
   .custom-footer {
-    background: #121417;
+    background: transparent;
     color: #94A3B8;
   }
 }
