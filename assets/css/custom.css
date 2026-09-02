@@ -67,8 +67,11 @@ a:focus {
 /* Elimina las líneas de separación que añade el tema entre columnas y header */
 .side-bar,
 .side-bar-container,
-.main-content-wrap {
+.main-content-wrap,
+.main-content {
   border: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
   box-shadow: none !important;
 }
 
