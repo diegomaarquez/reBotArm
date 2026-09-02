@@ -60,6 +60,16 @@ a:focus {
 /* Limpieza de fondos transparentes en cabeceras internas */
 .main-header {
   background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Elimina las líneas de separación que añade el tema entre columnas y header */
+.side-bar,
+.side-bar-container,
+.main-content-wrap {
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 /* Iconos y controles del header en blanco */
