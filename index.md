@@ -8,22 +8,8 @@ nav_order: 1
 
 ![rebot](assets/img/rebot.jpg)
 
+Este sitio reúne la documentación del brazo robótico reBot Arm A601. Explora sus dos áreas de trabajo:
 
-Este repositorio está diseñado para entender como utilizar la plantilla de repositorio que utiliza **"Just the docs"** de Jekyll y el lenguaje **"Markdown"**:
-
-1. **Crear y publicar** el sitio en GitHub Pages.
-2. Aprender la **estructura** típica de un repo de documentación.
-3. Dominar **Markdown** (texto, listas, tablas, código).
-4. Configurar la **navegación** (sidebar, secciones, orden).
-5. Agregar **imágenes, videos** y otros recursos.
-6. Ajustar **estilos** (logo, colores, footer).
-
-
-Contenido:
-- [1. Publicar en GitHub Pages](01-publicar-en-github-pages.md)
-- [2. Estructura del repositorio](02-estructura-del-repo.md)
-- [3. Escribir en Markdown](03-markdown.md)
-- [4. Personalización visual](04-estilos.md)
-- [5. Creación de PCBs](05-creacion-de-pcbs.md)
-- [6. Modelado de Robot 3D](06-modelado-de-robot-3d.md)
+- [Creación de PCBs](05-creacion-de-pcbs.md)
+- [Modelado de Robot 3D](06-modelado-de-robot-3d.md)
 
