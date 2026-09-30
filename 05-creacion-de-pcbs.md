@@ -10,7 +10,7 @@ nav_order: 6
 
 Esta placa utiliza un microcontrolador ATtiny45V para controlar tres LEDs. Al accionar un pulsador, los LEDs se encienden secuencialmente, uno por uno. El interruptor mecánico conecta o desconecta la alimentación.
 
-El orden previsto es LED 1, LED 2 y LED 3. El tiempo entre LEDs y si los LEDs anteriores permanecen encendidos o se apagan al avanzar depende del programa del ATtiny45V y debe confirmarse con el comportamiento final.
+La secuencia avanza una posición por cada pulsación: se enciende el siguiente LED y los otros dos quedan apagados. El programa del ATtiny45V se cargó usando un Arduino.
 
 ## Materiales
 
@@ -25,17 +25,32 @@ El orden previsto es LED 1, LED 2 y LED 3. El tiempo entre LEDs y si los LEDs an
 ## Funcionamiento
 
 1. El interruptor mecánico conecta la batería y alimenta el circuito.
-2. Al presionar el botón de inicio, el ATtiny45V comienza la secuencia.
-3. El microcontrolador enciende los LEDs en orden, uno por uno.
-4. El segundo pulsador también forma parte del circuito; su función debe especificarse según el programa cargado.
+2. Al presionar el pulsador de avance, el ATtiny45V pasa al LED siguiente.
+3. Solo queda encendido el LED seleccionado; los otros dos se apagan.
+4. La secuencia recorre LED 1, LED 2 y LED 3. El comportamiento después del tercer LED depende del programa cargado.
+5. El segundo pulsador también forma parte del circuito; su función debe confirmarse con el esquema o el programa.
+
+## Programación del ATtiny45V con Arduino
+
+El programa se puede escribir y compilar en Arduino IDE. Para cargarlo se necesita un núcleo de placas que incluya el ATtiny45V y un programador ISP; un Arduino Uno puede funcionar como Arduino as ISP.
+
+1. Instala en Arduino IDE un core compatible con ATtiny45/45V y selecciona el modelo y la frecuencia que correspondan a la configuración del microcontrolador.
+2. Si usas un Arduino Uno como programador, carga primero el ejemplo **ArduinoISP** en el Uno.
+3. Conecta el Uno al ATtiny45V mediante las señales ISP: RESET, MOSI, MISO, SCK, alimentación y GND. Consulta el pinout de ambos dispositivos y el esquema de esta placa antes de cablear.
+4. En Arduino IDE, selecciona el ATtiny45V, la frecuencia y **Arduino as ISP** como programador. Si hace falta configurar los fusibles o la fuente de reloj, usa **Burn Bootloader**; esto configura el chip y no significa que necesite un bootloader para funcionar.
+5. Carga el sketch mediante **Upload Using Programmer** y prueba la placa.
+
+En el programa, configura los pines de los tres LEDs como salidas y el del pulsador como entrada según el circuito. En cada pulsación válida, incrementa la posición, apaga los tres LEDs y enciende únicamente el correspondiente a la nueva posición. Añade antirrebote (debounce) para que una sola pulsación mecánica no avance varias posiciones. Los números de pin y el modo de entrada deben tomarse del esquema; no están especificados aquí.
+
+Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V y por la batería. No conectes a la vez una alimentación externa y los 5 V del Arduino sin verificar que el circuito lo admite.
 
 ## Archivos del proyecto
 
-Los tres adjuntos todavía no están en el repositorio. Cuando se agreguen, se mostrarán aquí:
+Las dos imágenes todavía no están en el repositorio:
 
 - Foto del esquema electrónico: `assets/img/pcb/esquematico-electronico.png`.
 - Foto del diseño de la PCB: `assets/img/pcb/diseno-pcb.png`.
-- Modelo 3D STL de la PCB terminada: `assets/files/pcb-rebot-arm.stl`.
+- [Modelo 3D STL de la PCB terminada]({{ '/assets/3d/g.stl' | relative_url }}).
 
 El STL permite visualizar la geometría 3D; para fabricar una placa electrónica normalmente se necesitan archivos Gerber y de taladros, no un STL.
 
