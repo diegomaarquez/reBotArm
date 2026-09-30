@@ -6,63 +6,66 @@ nav_order: 7
 
 # Modelado de Robot 3D
 
-El modelado 3D permite visualizar el brazo robótico, revisar su montaje y detectar interferencias antes de fabricar piezas. El modelo debe representar las dimensiones y componentes reales, no solo la apariencia exterior.
+## Brazo robótico de 3 grados de libertad
 
-## 1) Reunir medidas y componentes
+El proyecto consiste en un brazo robótico de **3 grados de libertad (GDL)**, modelado en **Autodesk Inventor**. Esta página reunirá los planos de fabricación, las imágenes renderizadas de las piezas, el ensamble CAD, el render general y el modelo 3D del brazo.
 
-Antes de modelar, identifica los elementos que condicionan la geometría:
+> Los archivos del brazo todavía no están en el repositorio. Las rutas de esta página son una propuesta para organizar los entregables; se actualizarán cuando se agreguen los archivos reales. El archivo `assets/3d/g.stl` corresponde a la PCB y no al brazo robótico.
 
-- Servomotores, motores o actuadores y sus dimensiones.
-- Longitud de cada eslabón y posición de los ejes de articulación.
-- Tornillos, soportes, rodamientos y conectores.
-- Espacio para cables y acceso para montaje y mantenimiento.
+## Planos de las piezas
 
-Usa las hojas de datos o mide las piezas físicas. Registra las unidades y conserva una referencia para cada dimensión.
+Aquí se publicará un plano por cada pieza fabricada. Los planos deben incluir vistas suficientes para definir la geometría, cotas, unidades, material y escala. Los nombres de pieza se tomarán del proyecto de Inventor para que coincidan con el ensamble.
 
-## 2) Dividir el brazo en piezas
+Carpeta propuesta: `assets/files/robot-3d/planos/`.
 
-Organiza el modelo en componentes independientes, por ejemplo:
+Se pueden publicar como PDF para consulta y conservar los archivos editables de dibujo de Inventor (`.idw` o `.dwg`) junto con las piezas (`.ipt`).
 
-- Base fija.
-- Eslabones móviles.
-- Soportes para actuadores.
-- Efector final o pinza.
-- Cubiertas y piezas de montaje.
+| Pieza | Plano |
+| --- | --- |
+| Se agregará el nombre usado en Inventor | Pendiente de agregar |
 
-Mantener las piezas separadas facilita modificar dimensiones, revisar el ensamblaje y preparar piezas para impresión o fabricación.
+## Imágenes renderizadas de cada pieza
 
-## 3) Modelar las piezas y el ensamblaje
+Se añadirá una imagen renderizada independiente por cada pieza, identificada con el mismo nombre que tiene en Inventor. Las imágenes permiten apreciar la forma y el acabado; las dimensiones de fabricación se consultan en los planos.
 
-En el programa CAD elegido, trabaja con medidas paramétricas siempre que sea posible. Modela primero las interfaces mecánicas (agujeros, ejes y superficies de montaje) y después agrega la geometría exterior.
+Carpeta propuesta: `assets/img/robot-3d/piezas/`.
 
-1. Crea la base y define el origen del ensamblaje.
-2. Añade cada eslabón con la distancia correcta entre ejes.
-3. Coloca actuadores y soportes usando sus dimensiones reales.
-4. Ensambla las piezas con restricciones que representen las articulaciones.
-5. Añade la pinza u otra herramienta en el extremo del brazo.
+| Pieza | Render |
+| --- | --- |
+| Se agregará el nombre usado en Inventor | Pendiente de agregar |
 
-## 4) Revisar movimiento y fabricación
+## Ensamble en software CAD
 
-Comprueba el recorrido de cada articulación y busca colisiones entre piezas, cables y estructura. Verifica también que:
+El ensamble completo se realizará en Autodesk Inventor y reunirá los componentes y piezas del brazo. Se documentará con el archivo de ensamble (`.iam`) y, cuando esté disponible, una captura del árbol de componentes.
 
-- Los actuadores puedan montarse y retirarse.
-- Los tornillos y herramientas tengan espacio de acceso.
-- Las paredes, uniones y soportes sean adecuados para el proceso de fabricación.
-- Los cables puedan seguir el movimiento sin quedar atrapados o tensos.
+En la revisión del ensamble se comprobará que:
 
-Las holguras y espesores dependen del material, del proceso de fabricación y de las cargas. Confírmalos con las especificaciones del proceso y pruebas físicas.
+- Las tres articulaciones estén representadas con restricciones coherentes con sus grados de libertad.
+- Las piezas coincidan en sus puntos de unión y no haya interferencias.
+- Los actuadores y elementos de sujeción tengan espacio para montarse.
+- El movimiento previsto no provoque colisiones entre las piezas.
 
-## 5) Preparar entregables
+Carpeta propuesta para el archivo CAD: `assets/files/robot-3d/ensamble/`.
 
-Guarda el archivo editable del proyecto y exporta formatos de intercambio o fabricación según se necesite, por ejemplo STEP para intercambio CAD o STL para impresión 3D. Revisa la orientación, escala y unidades antes de exportar.
+## Renderizado del brazo completo
 
-## Lista de comprobación
+Se agregará un render del ensamble completo para mostrar el aspecto final del brazo. La imagen se guardará como `assets/img/robot-3d/ensamble-render.png` cuando esté disponible.
 
-- [ ] Las dimensiones se basan en componentes reales.
-- [ ] Las articulaciones y distancias entre ejes son correctas.
-- [ ] Se revisaron interferencias durante el movimiento.
-- [ ] Hay espacio para cables, tornillos y mantenimiento.
-- [ ] Los archivos exportados conservan escala y unidades.
+## Modelo 3D manipulable
+
+El modelo se exportará desde Inventor como STL para poder girarlo y acercarlo desde esta página. También se recomienda conservar una exportación STEP para intercambio CAD, ya que mantiene mejor la estructura geométrica para continuar editando el diseño.
+
+Cuando se agregue el STL del brazo, aquí se mostrará en un visor interactivo. Por ahora, el visor está pendiente del archivo de ensamble; no se reutiliza `assets/3d/g.stl` porque ese modelo pertenece a la PCB.
+
+Carpeta propuesta: `assets/3d/robot-3d/`.
+
+## Lista de entregables
+
+- [ ] Planos PDF de las piezas.
+- [ ] Render individual de cada pieza.
+- [ ] Ensamble editable de Inventor (`.iam`) y piezas (`.ipt`).
+- [ ] Render del brazo ensamblado.
+- [ ] Modelo del brazo exportado en STL y STEP.
 
 ## Sección anterior
 
