@@ -54,7 +54,7 @@ Las dos imágenes todavía no están en el repositorio:
 
 ### Visor 3D
 
-<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/g.stl' | relative_url }}" aria-label="Visor interactivo de la PCB">
+<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ge.stl' | relative_url }}" aria-label="Visor interactivo de la PCB">
 	<div class="pcb-stl-viewer__viewport">
 		<canvas class="pcb-stl-viewer__canvas" aria-label="Modelo 3D de la PCB" role="img"></canvas>
 		<p class="pcb-stl-viewer__status" data-viewer-status aria-live="polite">Cargando modelo 3D...</p>
