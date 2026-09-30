@@ -6,66 +6,45 @@ nav_order: 6
 
 # Creación de PCBs
 
-Una PCB (placa de circuito impreso) conecta y sostiene los componentes electrónicos de un proyecto. Para el brazo robótico, puede servir para organizar conexiones de alimentación, controladores de motores, sensores y señales de control.
+## Proyecto: secuencia de tres LEDs
 
-> El diseño final depende de los componentes, corrientes y tensiones reales del robot. Verifica sus hojas de datos antes de fabricar la placa.
+Esta placa utiliza un microcontrolador ATtiny45V para controlar tres LEDs. Al accionar un pulsador, los LEDs se encienden secuencialmente, uno por uno. El interruptor mecánico conecta o desconecta la alimentación.
 
-## 1) Definir qué debe hacer la placa
+El orden previsto es LED 1, LED 2 y LED 3. El tiempo entre LEDs y si los LEDs anteriores permanecen encendidos o se apagan al avanzar depende del programa del ATtiny45V y debe confirmarse con el comportamiento final.
 
-Antes de dibujar el circuito, anota:
+## Materiales
 
-- Qué componentes se conectarán: microcontrolador, servomotores, sensores y conectores.
-- La tensión y corriente requeridas por cada componente.
-- Qué señales necesita cada conexión y dónde se ubicarán los conectores.
-- Las dimensiones máximas y los orificios de montaje disponibles.
+- 1 microcontrolador ATtiny45V.
+- 1 batería tipo reloj; modelo y tensión por confirmar.
+- 1 interruptor mecánico Würth.
+- 1 conector hembra de 6 pines.
+- 5 resistencias de 220 ohmios.
+- 2 pulsadores genéricos.
+- 3 LEDs.
 
-Separa las conexiones de alimentación de motores de las señales de control cuando el diseño lo requiera. No supongas que una salida de microcontrolador puede alimentar directamente un motor.
+## Funcionamiento
 
-## 2) Dibujar el esquema eléctrico
+1. El interruptor mecánico conecta la batería y alimenta el circuito.
+2. Al presionar el botón de inicio, el ATtiny45V comienza la secuencia.
+3. El microcontrolador enciende los LEDs en orden, uno por uno.
+4. El segundo pulsador también forma parte del circuito; su función debe especificarse según el programa cargado.
 
-En una herramienta de diseño electrónico, como KiCad, crea un proyecto y coloca los símbolos de los componentes. Conecta alimentación, tierra y señales; agrega etiquetas y valores para que el circuito sea fácil de revisar.
+## Archivos del proyecto
 
-Antes de pasar a la placa:
+Los tres adjuntos todavía no están en el repositorio. Cuando se agreguen, se mostrarán aquí:
 
-- Comprueba que cada componente tenga alimentación y tierra donde corresponde.
-- Confirma el orden de pines de conectores, sensores y controladores.
-- Ejecuta la verificación eléctrica (ERC) y revisa los avisos.
-- Compara el esquema con las hojas de datos de los componentes.
+- Foto del esquema electrónico: `assets/img/pcb/esquematico-electronico.png`.
+- Foto del diseño de la PCB: `assets/img/pcb/diseno-pcb.png`.
+- Modelo 3D STL de la PCB terminada: `assets/files/pcb-rebot-arm.stl`.
 
-## 3) Diseñar la placa
+El STL permite visualizar la geometría 3D; para fabricar una placa electrónica normalmente se necesitan archivos Gerber y de taladros, no un STL.
 
-Asigna una huella (footprint) adecuada a cada componente y actualiza la PCB desde el esquema. Después:
+## Notas de revisión
 
-1. Define el contorno de la placa y los orificios de montaje.
-2. Ubica primero los conectores y componentes que tienen restricciones mecánicas.
-3. Agrupa los componentes por función y deja espacio para cables y herramientas.
-4. Traza las pistas respetando las reglas eléctricas del fabricante y las necesidades de corriente.
-5. Añade nombres de conectores y señales en la serigrafía.
-
-La anchura de pista, el espaciado y el número de capas deben elegirse según las especificaciones del fabricante y las condiciones eléctricas del circuito; no uses valores genéricos sin comprobarlos.
-
-## 4) Revisar antes de fabricar
-
-Ejecuta la verificación de reglas de diseño (DRC) y corrige los errores. Revisa también visualmente:
-
-- Que no haya pistas sin conectar ni cortocircuitos.
-- Que la polaridad y orientación de los componentes sean correctas.
-- Que los conectores puedan instalarse y conectarse físicamente.
-- Que el contorno y los orificios coincidan con el espacio disponible.
-
-Exporta los archivos de fabricación solicitados por el proveedor, normalmente Gerber y taladros, y revisa el resultado con un visor antes de enviar el pedido.
-
-## 5) Montaje y prueba
-
-Al recibir la placa, inspecciona soldaduras y orientación. Prueba primero la alimentación y las señales sin conectar cargas que puedan dañarse. Después incorpora los componentes y valida cada función de forma gradual.
-
-## Lista de comprobación
-
-- [ ] El esquema coincide con las hojas de datos.
-- [ ] Se revisaron los avisos de ERC y DRC.
-- [ ] Las huellas y conectores corresponden a los componentes reales.
-- [ ] Se verificaron dimensiones, montaje y archivos de fabricación.
-- [ ] La placa se probó de forma gradual y segura.
+- Confirmar el modelo y la tensión de la batería tipo reloj y que pueda alimentar el circuito.
+- Verificar la conexión del ATtiny45V, la polaridad de los LEDs y el orden de pines del conector.
+- Confirmar en el esquema cómo se usan las cinco resistencias y cuál es la función del segundo pulsador.
+- Comprobar que cada LED tenga una resistencia limitadora en serie y que sus corrientes estén dentro de los límites de los componentes.
 
 ## Siguiente sección
 
