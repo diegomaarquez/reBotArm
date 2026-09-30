@@ -120,6 +120,8 @@ Tip: si no ves cambios, fuerza recarga del navegador (hard refresh):
 - **Tema 2 — Estructura del repositorio**: `02-estructura-del-repo.md`
 - **Tema 3 — Escribir en Markdown**: `03-markdown.md`
 - **Tema 4 — Estilos y personalización visual**: `04-estilos.md`
+- **Tema 5 — Creación de PCBs**: `05-creacion-de-pcbs.md`
+- **Tema 6 — Modelado de Robot 3D**: `06-modelado-de-robot-3d.md`
 
 ---
 

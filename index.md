@@ -24,4 +24,6 @@ Contenido:
 - [2. Estructura del repositorio](02-estructura-del-repo.md)
 - [3. Escribir en Markdown](03-markdown.md)
 - [4. Personalización visual](04-estilos.md)
+- [5. Creación de PCBs](05-creacion-de-pcbs.md)
+- [6. Modelado de Robot 3D](06-modelado-de-robot-3d.md)
 
