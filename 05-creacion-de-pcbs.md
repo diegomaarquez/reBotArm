@@ -50,9 +50,34 @@ Las dos imágenes todavía no están en el repositorio:
 
 - Foto del esquema electrónico: `assets/img/pcb/esquematico-electronico.png`.
 - Foto del diseño de la PCB: `assets/img/pcb/diseno-pcb.png`.
-- [Modelo 3D STL de la PCB terminada]({{ '/assets/3d/g.stl' | relative_url }}).
+- Modelo 3D STL de la PCB terminada: `assets/3d/g.stl`.
 
-El STL permite visualizar la geometría 3D; para fabricar una placa electrónica normalmente se necesitan archivos Gerber y de taladros, no un STL.
+### Visor 3D
+
+<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/g.stl' | relative_url }}" aria-label="Visor interactivo de la PCB">
+	<div class="pcb-stl-viewer__viewport">
+		<canvas class="pcb-stl-viewer__canvas" aria-label="Modelo 3D de la PCB" role="img"></canvas>
+		<p class="pcb-stl-viewer__status" data-viewer-status aria-live="polite">Cargando modelo 3D...</p>
+	</div>
+	<div class="pcb-stl-viewer__controls" role="group" aria-label="Controles del modelo 3D">
+		<button type="button" data-viewer-action="zoom-out" aria-label="Alejar" title="Alejar">−</button>
+		<button type="button" data-viewer-action="zoom-in" aria-label="Acercar" title="Acercar">+</button>
+		<button type="button" data-viewer-action="reset" aria-label="Restablecer vista" title="Restablecer vista">Restablecer vista</button>
+		<a class="pcb-stl-viewer__download" href="{{ '/assets/3d/g.stl' | relative_url }}" download>Descargar STL</a>
+	</div>
+</section>
+
+<script type="importmap">
+	{
+		"imports": {
+			"three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+			"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+		}
+	}
+</script>
+<script type="module" src="{{ '/assets/js/pcb-stl-viewer.js' | relative_url }}"></script>
+
+El STL permite visualizar la geometría 3D; para fabricar una placa electrónica normalmente se necesitan archivos Gerber.
 
 ## Notas de revisión
 
