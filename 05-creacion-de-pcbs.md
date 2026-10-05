@@ -54,10 +54,6 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 ![Diseño de la PCB de la placa de botones](assets/img/pcb_botones_diseno.png)
 
-### Modelo 3D
-
-- Archivo GLB de la PCB terminada: `assets/3d/ATT63634.glb`.
-
 ### Visor 3D
 
 <section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ATT63634.glb' | relative_url }}" aria-label="Visor interactivo de la PCB">
