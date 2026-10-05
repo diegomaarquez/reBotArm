@@ -52,7 +52,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 ### Diseño de la PCB
 
-![Diseño de la PCB ](assets/img/pcb_botones_diseno.png)
+![Diseño de PCB ](assets/img/pcb_botones_diseno.png)
 
 ### Visor 3D
 
