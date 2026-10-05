@@ -48,11 +48,11 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 ### Esquema electrónico
 
-![Esquema electrónico de la placa de botones](assets/img/pcb_botones_esquema.png)
+![Esquema electrónico de la placa](assets/img/pcb_botones_esquema.png)
 
 ### Diseño de la PCB
 
-![Diseño de la PCB de la placa de botones](assets/img/pcb_botones_diseno.png)
+![Diseño de la PCB ](assets/img/pcb_botones_diseno.png)
 
 ### Visor 3D
 
