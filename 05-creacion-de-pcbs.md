@@ -46,15 +46,21 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 ## Archivos del proyecto
 
-Las dos imágenes todavía no están en el repositorio:
+### Esquema electrónico
 
-- Foto del esquema electrónico: `assets/img/pcb/esquematico-electronico.png`.
-- Foto del diseño de la PCB: `assets/img/pcb/diseno-pcb.png`.
-- Modelo 3D STL de la PCB terminada: `assets/3d/g.stl`.
+![Esquema electrónico de la placa de botones](assets/img/pcb_botones_esquema.png)
+
+### Diseño de la PCB
+
+![Diseño de la PCB de la placa de botones](assets/img/pcb_botones_diseno.png)
+
+### Modelo 3D
+
+- Archivo STL de la PCB terminada: `assets/3d/g.stl`.
 
 ### Visor 3D
 
-<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ge.stl' | relative_url }}" aria-label="Visor interactivo de la PCB">
+<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ATT12400.stl' | relative_url }}" aria-label="Visor interactivo de la PCB">
 	<div class="pcb-stl-viewer__viewport">
 		<canvas class="pcb-stl-viewer__canvas" aria-label="Modelo 3D de la PCB" role="img"></canvas>
 		<p class="pcb-stl-viewer__status" data-viewer-status aria-live="polite">Cargando modelo 3D...</p>
