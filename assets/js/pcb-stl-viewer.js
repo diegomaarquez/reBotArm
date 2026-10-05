@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { STLLoader } from "three/addons/loaders/STLLoader.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const viewer = document.querySelector("[data-stl-viewer]");
 
@@ -13,7 +14,7 @@ if (viewer) {
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   } catch {
-    status.textContent = "Este navegador no pudo iniciar el visor 3D. Puedes descargar el archivo STL.";
+    status.textContent = "Este navegador no pudo iniciar el visor 3D. Puedes descargar el archivo del modelo.";
     viewer.dataset.viewerState = "error";
   }
 
@@ -50,32 +51,63 @@ if (viewer) {
       controls.update();
     };
 
-    const loader = new STLLoader();
-    loader.load(
-      viewer.dataset.modelUrl,
-      (geometry) => {
-        geometry.computeVertexNormals();
-        geometry.computeBoundingBox();
-        const center = geometry.boundingBox.getCenter(new THREE.Vector3());
-        geometry.translate(-center.x, -center.y, -center.z);
-        geometry.computeBoundingSphere();
-        modelRadius = geometry.boundingSphere.radius || 1;
+    const modelUrl = viewer.dataset.modelUrl || "";
+    const isGlb = /\.(gltf|glb)$/i.test(modelUrl);
 
-        const material = new THREE.MeshStandardMaterial({
-          color: 0x538b5e,
-          metalness: 0.12,
-          roughness: 0.62,
-        });
-        scene.add(new THREE.Mesh(geometry, material));
-        setDefaultView();
-        status.hidden = true;
-      },
-      undefined,
-      () => {
-        status.textContent = "No se pudo cargar el modelo 3D. Puedes descargar el archivo STL.";
-        viewer.dataset.viewerState = "error";
-      },
-    );
+    const addModel = (object) => {
+      object.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = false;
+          child.receiveShadow = false;
+        }
+      });
+
+      scene.add(object);
+      const box = new THREE.Box3().setFromObject(object);
+      const size = box.getSize(new THREE.Vector3());
+      modelRadius = Math.max(size.x, size.y, size.z) * 0.6 || 1;
+      setDefaultView();
+      status.hidden = true;
+    };
+
+    const handleLoadError = () => {
+      status.textContent = "No se pudo cargar el modelo 3D. Puedes descargar el archivo del modelo.";
+      viewer.dataset.viewerState = "error";
+    };
+
+    if (isGlb) {
+      const gltfLoader = new GLTFLoader();
+      gltfLoader.load(
+        modelUrl,
+        (gltf) => addModel(gltf.scene),
+        undefined,
+        handleLoadError,
+      );
+    } else {
+      const stlLoader = new STLLoader();
+      stlLoader.load(
+        modelUrl,
+        (geometry) => {
+          geometry.computeVertexNormals();
+          geometry.computeBoundingBox();
+          const center = geometry.boundingBox.getCenter(new THREE.Vector3());
+          geometry.translate(-center.x, -center.y, -center.z);
+          geometry.computeBoundingSphere();
+          modelRadius = geometry.boundingSphere.radius || 1;
+
+          const material = new THREE.MeshStandardMaterial({
+            color: 0x538b5e,
+            metalness: 0.12,
+            roughness: 0.62,
+          });
+          scene.add(new THREE.Mesh(geometry, material));
+          setDefaultView();
+          status.hidden = true;
+        },
+        undefined,
+        handleLoadError,
+      );
+    }
 
     viewer.querySelectorAll("[data-viewer-action]").forEach((button) => {
       button.addEventListener("click", () => {

@@ -56,11 +56,11 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 ### Modelo 3D
 
-- Archivo STL de la PCB terminada: `assets/3d/ATT12400.stl`.
+- Archivo GLB de la PCB terminada: `assets/3d/ATT63634.glb`.
 
 ### Visor 3D
 
-<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ATT48044.step' | relative_url }}" aria-label="Visor interactivo de la PCB">
+<section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ATT63634.glb' | relative_url }}" aria-label="Visor interactivo de la PCB">
 	<div class="pcb-stl-viewer__viewport">
 		<canvas class="pcb-stl-viewer__canvas" aria-label="Modelo 3D de la PCB" role="img"></canvas>
 		<p class="pcb-stl-viewer__status" data-viewer-status aria-live="polite">Cargando modelo 3D...</p>
@@ -69,7 +69,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 		<button type="button" data-viewer-action="zoom-out" aria-label="Alejar" title="Alejar">−</button>
 		<button type="button" data-viewer-action="zoom-in" aria-label="Acercar" title="Acercar">+</button>
 		<button type="button" data-viewer-action="reset" aria-label="Restablecer vista" title="Restablecer vista">Restablecer vista</button>
-		<a class="pcb-stl-viewer__download" href="{{ '/assets/3d/g.stl' | relative_url }}" download>Descargar STL</a>
+		<a class="pcb-stl-viewer__download" href="{{ '/assets/3d/ATT63634.glb' | relative_url }}" download>Descargar GLB</a>
 	</div>
 </section>
 
@@ -83,7 +83,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 </script>
 <script type="module" src="{{ '/assets/js/pcb-stl-viewer.js' | relative_url }}"></script>
 
-El STL permite visualizar la geometría 3D; para fabricar una placa electrónica normalmente se necesitan archivos Gerber.
+El modelo GLB permite visualizar la geometría y los materiales del diseño 3D con mejor resultado visual en la web; para fabricar una placa electrónica normalmente se necesitan archivos Gerber.
 
 ## Notas de revisión
 
