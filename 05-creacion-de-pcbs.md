@@ -56,7 +56,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 ### Modelo 3D
 
-- Archivo STL de la PCB terminada: `assets/3d/g.stl`.
+- Archivo STL de la PCB terminada: `assets/3d/ATT12400.stl`.
 
 ### Visor 3D
 
