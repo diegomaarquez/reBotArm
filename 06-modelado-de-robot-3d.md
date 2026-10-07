@@ -86,7 +86,7 @@ Los siguientes renders muestran las piezas modeladas. Las dimensiones de fabrica
 		<figcaption>Joint1 (Joint1.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="articulaciones">
-		<a href="{{ '/assets/brazo_3d/joint2.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Joint2" aria-label="Ampliar Joint2">
+		<a href="{{ '/assets/brazo_3d/Joint1.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Joint2" aria-label="Ampliar Joint2">
 			<img src="{{ '/assets/brazo_3d/joint2.png' | relative_url }}" alt="Render de la pieza joint2" loading="lazy">
 			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>

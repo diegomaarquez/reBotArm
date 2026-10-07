@@ -6,13 +6,28 @@ nav_order: 6
 
 # Creación de PCBs
 
+<div class="site-page-intro">
+	<p class="site-eyebrow">01 / ELECTRÓNICA EMBEBIDA</p>
+	<p class="site-page-lead">Diseño y programación de una placa con ATtiny45V que controla una secuencia de tres LEDs mediante pulsadores.</p>
+</div>
+
+<nav class="site-section-navigation" aria-label="Secciones de la placa">
+	<a href="#proyecto">Proyecto</a>
+	<a href="#materiales">Materiales</a>
+	<a href="#funcionamiento">Funcionamiento</a>
+	<a href="#programacion">Programación</a>
+	<a href="#archivos">Diseño y visor 3D</a>
+</nav>
+
 ## Proyecto: secuencia de tres LEDs
+{: #proyecto }
 
 Esta placa utiliza un microcontrolador ATtiny45V para controlar tres LEDs. Al accionar un pulsador, los LEDs se encienden secuencialmente, uno por uno. El interruptor mecánico conecta o desconecta la alimentación.
 
 La secuencia avanza una posición por cada pulsación: se enciende el siguiente LED y los otros dos quedan apagados. El programa del ATtiny45V se cargó usando un Arduino.
 
 ## Materiales
+{: #materiales }
 
 - 1 microcontrolador ATtiny45V.
 - 1 batería tipo reloj; modelo y tensión por confirmar.
@@ -23,6 +38,7 @@ La secuencia avanza una posición por cada pulsación: se enciende el siguiente 
 - 3 LEDs.
 
 ## Funcionamiento
+{: #funcionamiento }
 
 1. El interruptor mecánico conecta la batería y alimenta el circuito.
 2. Al presionar el pulsador de avance, el ATtiny45V pasa al LED siguiente.
@@ -31,6 +47,7 @@ La secuencia avanza una posición por cada pulsación: se enciende el siguiente 
 5. El segundo pulsador también forma parte del circuito; su función debe confirmarse con el esquema o el programa.
 
 ## Programación del ATtiny45V con Arduino
+{: #programacion }
 
 El programa se puede escribir y compilar en Arduino IDE. Para cargarlo se necesita un núcleo de placas que incluya el ATtiny45V y un programador ISP; un Arduino Uno puede funcionar como Arduino as ISP.
 
@@ -45,16 +62,26 @@ En el programa, configura los pines de los tres LEDs como salidas y el del pulsa
 Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V y por la batería. No conectes a la vez una alimentación externa y los 5 V del Arduino sin verificar que el circuito lo admite.
 
 ## Archivos del proyecto
+{: #archivos }
 
 ### Esquema electrónico
+{: #esquema }
 
-![Esquema electrónico de la placa](assets/img/pcb_botones_esquema.png)
+<a class="pcb-diagram-link" href="{{ '/assets/img/pcb_botones_esquema.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Abrir esquema electrónico en tamaño completo">
+	<img src="{{ '/assets/img/pcb_botones_esquema.png' | relative_url }}" alt="Esquema electrónico de la placa" loading="lazy">
+	<span>VER ESQUEMA ↗</span>
+</a>
 
 ### Diseño de la PCB
+{: #diseno-pcb }
 
-![Diseño de PCB ](assets/img/pcb_botones_diseno.png)
+<a class="pcb-diagram-link" href="{{ '/assets/img/pcb_botones_diseno.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Abrir diseño de PCB en tamaño completo">
+	<img src="{{ '/assets/img/pcb_botones_diseno.png' | relative_url }}" alt="Diseño de la placa de circuito impreso" loading="lazy">
+	<span>VER DISEÑO ↗</span>
+</a>
 
 ### Visor 3D
+{: #modelo-3d }
 
 <section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ATT63634.glb' | relative_url }}" aria-label="Visor interactivo del PCB">
 	<div class="pcb-stl-viewer__viewport">
@@ -82,6 +109,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 El modelo GLB permite visualizar la geometría y los materiales del diseño 3D con mejor resultado visual en la web; para fabricar una placa electrónica normalmente se necesitan archivos Gerber.
 
 ## Notas de revisión
+{: #notas }
 
 - Confirmar el modelo y la tensión de la batería tipo reloj y que pueda alimentar el circuito.
 - Verificar la conexión del ATtiny45V, la polaridad de los LEDs y el orden de pines del conector.
