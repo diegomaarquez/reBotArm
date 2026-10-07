@@ -29,7 +29,13 @@ if (gallery) {
     button.addEventListener("click", () => {
       const category = button.dataset.galleryFilter;
       galleryItems.forEach((item) => {
-        item.hidden = category !== "all" && item.dataset.galleryCategory !== category;
+        const isVisible = category === "all" || item.dataset.galleryCategory === category;
+        item.hidden = !isVisible;
+        item.classList.remove("is-filtered-in");
+        if (isVisible) {
+          void item.offsetWidth;
+          item.classList.add("is-filtered-in");
+        }
       });
       filterButtons.forEach((filter) => {
         filter.setAttribute("aria-pressed", String(filter === button));
@@ -48,6 +54,7 @@ if (gallery && dialog instanceof HTMLDialogElement && dialog.showModal) {
   const nextButton = dialog.querySelector("[data-lightbox-next]");
   let lightboxLinks = [];
   let activeIndex = 0;
+  let touchStartX = null;
 
   const showImage = (index) => {
     activeIndex = (index + lightboxLinks.length) % lightboxLinks.length;
@@ -87,6 +94,18 @@ if (gallery && dialog instanceof HTMLDialogElement && dialog.showModal) {
       showImage(activeIndex + 1);
     }
   });
+
+  enlargedImage.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0].screenX;
+  }, { passive: true });
+
+  enlargedImage.addEventListener("touchend", (event) => {
+    if (touchStartX === null) return;
+    const distance = event.changedTouches[0].screenX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(distance) < 45) return;
+    showImage(activeIndex + (distance < 0 ? 1 : -1));
+  }, { passive: true });
 
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
