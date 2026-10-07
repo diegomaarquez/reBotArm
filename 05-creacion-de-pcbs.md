@@ -58,7 +58,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 
 <section class="pcb-stl-viewer" data-stl-viewer data-model-url="{{ '/assets/3d/ATT63634.glb' | relative_url }}" aria-label="Visor interactivo del PCB">
 	<div class="pcb-stl-viewer__viewport">
-		<canvas class="pcb-stl-viewer__canvas" aria-label="Modelo 3D de la PCB" role="img"></canvas>
+		<canvas class="pcb-stl-viewer__canvas" aria-label="Modelo 3D de PCB" role="img"></canvas>
 		<p class="pcb-stl-viewer__status" data-viewer-status aria-live="polite">Cargando el modelo 3D...</p>
 	</div>
 	<div class="pcb-stl-viewer__controls" role="group" aria-label="Controles del modelo 3D">
