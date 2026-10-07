@@ -77,7 +77,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 		}
 	}
 </script>
-<script type="module" src="{{ '/assets/js/pcb-stl-viewer.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/js/pcb-stl-viewer.js' | relative_url }}?v=2"></script>
 
 El modelo GLB permite visualizar la geometría y los materiales del diseño 3D con mejor resultado visual en la web; para fabricar una placa electrónica normalmente se necesitan archivos Gerber.
 

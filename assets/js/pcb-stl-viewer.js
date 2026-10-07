@@ -39,13 +39,18 @@ if (viewer) {
     scene.add(fillLight);
 
     let modelRadius = 1;
+    const modelCenter = new THREE.Vector3();
 
     const setDefaultView = () => {
-      camera.position.set(modelRadius * 2.8, modelRadius * 2.4, modelRadius * 2.8);
+      camera.position.set(
+        modelCenter.x + modelRadius * 2.8,
+        modelCenter.y + modelRadius * 2.4,
+        modelCenter.z + modelRadius * 2.8,
+      );
       camera.near = modelRadius / 100;
       camera.far = modelRadius * 30;
       camera.updateProjectionMatrix();
-      controls.target.set(0, 0, 0);
+      controls.target.copy(modelCenter);
       controls.minDistance = modelRadius * 0.65;
       controls.maxDistance = modelRadius * 8;
       controls.update();
@@ -62,14 +67,10 @@ if (viewer) {
         }
       });
 
-      const model = new THREE.Group();
-      model.add(object);
-      scene.add(model);
-
-      const box = new THREE.Box3().setFromObject(model);
+      scene.add(object);
+      const box = new THREE.Box3().setFromObject(object);
       const size = box.getSize(new THREE.Vector3());
-      const center = box.getCenter(new THREE.Vector3());
-      model.position.sub(center);
+      box.getCenter(modelCenter);
       modelRadius = Math.max(size.x, size.y, size.z) * 0.6 || 1;
       setDefaultView();
       status.hidden = true;
