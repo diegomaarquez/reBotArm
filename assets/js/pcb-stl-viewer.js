@@ -62,9 +62,14 @@ if (viewer) {
         }
       });
 
-      scene.add(object);
-      const box = new THREE.Box3().setFromObject(object);
+      const model = new THREE.Group();
+      model.add(object);
+      scene.add(model);
+
+      const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.sub(center);
       modelRadius = Math.max(size.x, size.y, size.z) * 0.6 || 1;
       setDefaultView();
       status.hidden = true;
