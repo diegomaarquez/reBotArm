@@ -18,3 +18,14 @@
   </p>
 
 </footer>
+
+<dialog class="site-image-lightbox" data-image-lightbox aria-label="Imagen ampliada">
+  <button class="site-image-lightbox__close" type="button" data-lightbox-close aria-label="Cerrar imagen" title="Cerrar">×</button>
+  <button class="site-image-lightbox__previous" type="button" data-lightbox-previous aria-label="Imagen anterior" title="Anterior">←</button>
+  <img data-lightbox-image alt="">
+  <button class="site-image-lightbox__next" type="button" data-lightbox-next aria-label="Imagen siguiente" title="Siguiente">→</button>
+  <p data-lightbox-caption></p>
+  <span class="site-image-lightbox__count" data-lightbox-count aria-live="polite"></span>
+</dialog>
+
+<script src="{{ '/assets/js/robot-arm-lightbox.js' | relative_url }}?v=2" defer></script>

@@ -17,9 +17,8 @@ nav_order: 7
 </div>
 
 <figure class="robot-arm-hero-image">
-	<a href="{{ '/assets/brazo_3d/ensamble_3d.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Ensamble 3D completo" aria-label="Ampliar el render del brazo ensamblado">
+	<a href="{{ '/assets/brazo_3d/ensamble_3d.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Ensamble 3D completo" aria-label="Ver el render del brazo ensamblado a tamaño completo">
 		<img src="{{ '/assets/brazo_3d/ensamble_3d.png' | relative_url }}" alt="Vista general del brazo robótico ensamblado en Autodesk Inventor" fetchpriority="high">
-		<span class="robot-arm-gallery__zoom" aria-hidden="true">Explorar imagen</span>
 	</a>
 	<figcaption><strong>Ensamble general</strong><span>Vista CAD · 3 grados de libertad</span></figcaption>
 </figure>
@@ -60,49 +59,42 @@ Los siguientes renders muestran las piezas modeladas. Las dimensiones de fabrica
 	<figure data-gallery-category="base">
 		<a href="{{ '/assets/brazo_3d/base.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Base del brazo robótico" aria-label="Ampliar la base del brazo robótico">
 			<img src="{{ '/assets/brazo_3d/base.png' | relative_url }}" alt="Render de la base del brazo robótico" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Base (base.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="base">
 		<a href="{{ '/assets/brazo_3d/tapa_base.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Tapa de la base" aria-label="Ampliar la tapa de la base">
 			<img src="{{ '/assets/brazo_3d/tapa_base.png' | relative_url }}" alt="Render de la tapa de la base" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Tapa de la base (tapa_base.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="base">
 		<a href="{{ '/assets/brazo_3d/primerservo.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Soporte del primer servo" aria-label="Ampliar el soporte del primer servo">
 			<img src="{{ '/assets/brazo_3d/primerservo.png' | relative_url }}" alt="Render del soporte del primer servo" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Soporte del primer servo (primerservo.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="articulaciones">
 		<a href="{{ '/assets/brazo_3d/Joint1.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Joint1" aria-label="Ampliar Joint1">
 			<img src="{{ '/assets/brazo_3d/Joint1.png' | relative_url }}" alt="Render de la pieza Joint1" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Joint1 (Joint1.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="articulaciones">
-		<a href="{{ '/assets/brazo_3d/Joint1.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Joint2" aria-label="Ampliar Joint2">
+		<a href="{{ '/assets/brazo_3d/joint2.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Joint2" aria-label="Ampliar Joint2">
 			<img src="{{ '/assets/brazo_3d/joint2.png' | relative_url }}" alt="Render de la pieza joint2" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Joint2 (joint2.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="pinza">
 		<a href="{{ '/assets/brazo_3d/griper1_Joint3.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Primera pieza de la pinza · Joint3" aria-label="Ampliar la primera pieza de la pinza">
 			<img src="{{ '/assets/brazo_3d/griper1_Joint3.png' | relative_url }}" alt="Render de la primera pieza de la pinza, correspondiente a Joint3" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Primera pieza de la pinza (griper1_Joint3.png)</figcaption>
 	</figure>
 	<figure data-gallery-category="pinza">
 		<a href="{{ '/assets/brazo_3d/griper2.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Segunda pieza de la pinza" aria-label="Ampliar la segunda pieza de la pinza">
 			<img src="{{ '/assets/brazo_3d/griper2.png' | relative_url }}" alt="Render de la segunda pieza de la pinza" loading="lazy">
-			<span class="robot-arm-gallery__zoom" aria-hidden="true">Ampliar</span>
 		</a>
 		<figcaption>Segunda pieza de la pinza (griper2.png)</figcaption>
 	</figure>
@@ -169,17 +161,6 @@ Carpeta propuesta: `assets/img/brazo-2d/corte-laser/`.
 - [ ] Imágenes de las piezas y de su distribución para corte.
 
 Los archivos del brazo aún no están en el repositorio. Las carpetas y tablas de esta página organizan los entregables pendientes.
-
-<dialog class="robot-arm-lightbox" data-image-lightbox aria-label="Imagen ampliada">
-	<button class="robot-arm-lightbox__close" type="button" data-lightbox-close aria-label="Cerrar imagen" title="Cerrar">×</button>
-	<button class="robot-arm-lightbox__previous" type="button" data-lightbox-previous aria-label="Imagen anterior" title="Anterior">←</button>
-	<img data-lightbox-image alt="">
-	<button class="robot-arm-lightbox__next" type="button" data-lightbox-next aria-label="Imagen siguiente" title="Siguiente">→</button>
-	<p data-lightbox-caption></p>
-	<span class="robot-arm-lightbox__count" data-lightbox-count aria-live="polite"></span>
-</dialog>
-
-<script src="{{ '/assets/js/robot-arm-lightbox.js' | relative_url }}" defer></script>
 
 ## Sección anterior
 

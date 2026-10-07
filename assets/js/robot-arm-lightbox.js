@@ -45,7 +45,7 @@ if (gallery) {
   });
 }
 
-if (gallery && dialog instanceof HTMLDialogElement && dialog.showModal) {
+if (dialog instanceof HTMLDialogElement && dialog.showModal) {
   const enlargedImage = dialog.querySelector("[data-lightbox-image]");
   const caption = dialog.querySelector("[data-lightbox-caption]");
   const counter = dialog.querySelector("[data-lightbox-count]");
@@ -73,10 +73,10 @@ if (gallery && dialog instanceof HTMLDialogElement && dialog.showModal) {
     if (!trigger) return;
 
     event.preventDefault();
-    lightboxLinks = Array.from(document.querySelectorAll(
-      ".robot-arm-hero-image [data-lightbox-trigger], .robot-arm-gallery figure:not([hidden]) [data-lightbox-trigger]",
-    ));
+    lightboxLinks = Array.from(document.querySelectorAll("[data-lightbox-trigger]"))
+      .filter((link) => !link.closest("[hidden]"));
     activeIndex = lightboxLinks.indexOf(trigger);
+    dialog.toggleAttribute("data-single-image", lightboxLinks.length < 2);
     showImage(activeIndex < 0 ? 0 : activeIndex);
     dialog.showModal();
   });

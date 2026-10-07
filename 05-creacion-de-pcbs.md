@@ -67,17 +67,15 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 ### Esquema electrónico
 {: #esquema }
 
-<a class="pcb-diagram-link" href="{{ '/assets/img/pcb_botones_esquema.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Abrir esquema electrónico en tamaño completo">
+<a class="pcb-diagram-link" href="{{ '/assets/img/pcb_botones_esquema.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Esquema electrónico de la placa" aria-label="Ver esquema electrónico de la placa a tamaño completo">
 	<img src="{{ '/assets/img/pcb_botones_esquema.png' | relative_url }}" alt="Esquema electrónico de la placa" loading="lazy">
-	<span>VER ESQUEMA ↗</span>
 </a>
 
 ### Diseño de la PCB
 {: #diseno-pcb }
 
-<a class="pcb-diagram-link" href="{{ '/assets/img/pcb_botones_diseno.png' | relative_url }}" target="_blank" rel="noopener" aria-label="Abrir diseño de PCB en tamaño completo">
+<a class="pcb-diagram-link" href="{{ '/assets/img/pcb_botones_diseno.png' | relative_url }}" data-lightbox-trigger data-lightbox-caption="Diseño de la placa de circuito impreso" aria-label="Ver diseño de la placa a tamaño completo">
 	<img src="{{ '/assets/img/pcb_botones_diseno.png' | relative_url }}" alt="Diseño de la placa de circuito impreso" loading="lazy">
-	<span>VER DISEÑO ↗</span>
 </a>
 
 ### Visor 3D
@@ -104,7 +102,7 @@ Al programar, comprueba la tensión de alimentación permitida por el ATtiny45V 
 		}
 	}
 </script>
-<script type="module" src="{{ '/assets/js/pcb-stl-viewer.js' | relative_url }}?v=2"></script>
+<script type="module" src="{{ '/assets/js/pcb-stl-viewer.js' | relative_url }}?v=3"></script>
 
 El modelo GLB permite visualizar la geometría y los materiales del diseño 3D con mejor resultado visual en la web; para fabricar una placa electrónica normalmente se necesitan archivos Gerber.
 

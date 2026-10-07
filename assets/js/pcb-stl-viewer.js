@@ -20,21 +20,30 @@ if (viewer) {
 
   if (renderer) {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x12180a);
+    scene.background = new THREE.Color(0x1a2530);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.12;
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.01, 10000);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.07;
+    controls.dampingFactor = 0.055;
     controls.enablePan = false;
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    controls.autoRotate = !motionPreference.matches;
+    controls.autoRotateSpeed = 0.3;
+    motionPreference.addEventListener("change", (event) => {
+      controls.autoRotate = !event.matches;
+    });
 
-    scene.add(new THREE.HemisphereLight(0xf2f5e9, 0x283321, 2.2));
+    scene.add(new THREE.HemisphereLight(0xe6f1f8, 0x334655, 2.1));
 
     const keyLight = new THREE.DirectionalLight(0xffffff, 2.4);
     keyLight.position.set(3, 5, 4);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0xa8d6ff, 1.1);
+    const fillLight = new THREE.DirectionalLight(0x9dc9e8, 1.25);
     fillLight.position.set(-4, 1, -3);
     scene.add(fillLight);
 
@@ -102,9 +111,9 @@ if (viewer) {
           modelRadius = geometry.boundingSphere.radius || 1;
 
           const material = new THREE.MeshStandardMaterial({
-            color: 0x538b5e,
-            metalness: 0.12,
-            roughness: 0.62,
+            color: 0x789cb8,
+            metalness: 0.24,
+            roughness: 0.46,
           });
           scene.add(new THREE.Mesh(geometry, material));
           setDefaultView();
