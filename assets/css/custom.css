@@ -444,3 +444,34 @@ video {
     margin-left: 0;
   }
 }
+
+.robot-arm-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.robot-arm-gallery figure,
+.robot-arm-assembly {
+  margin: 0;
+}
+
+.robot-arm-gallery img,
+.robot-arm-assembly img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(203, 213, 225, .3);
+}
+
+.robot-arm-gallery figcaption,
+.robot-arm-assembly figcaption {
+  margin-top: .4rem;
+  font-size: .9rem;
+}
+
+.robot-arm-assembly {
+  max-width: 900px;
+  margin: 1.5rem auto;
+}

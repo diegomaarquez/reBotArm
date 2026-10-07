@@ -26,13 +26,38 @@ Los planos se publicarán en PDF para consulta. Se conservarán también los dib
 
 ### Imágenes de las piezas
 
-Se añadirá una imagen renderizada por pieza, identificada con el mismo nombre que tiene en Inventor. Las dimensiones de fabricación se consultarán en los planos.
+Los siguientes renders muestran las piezas modeladas. Las dimensiones de fabricación se consultarán en los planos.
 
-Carpeta propuesta: `assets/img/brazo-3d/piezas/`.
-
-| Pieza | Render |
-| --- | --- |
-| Pendiente de definir | Pendiente de agregar |
+<div class="robot-arm-gallery">
+	<figure>
+		<img src="{{ '/assets/brazo_3d/base.png' | relative_url }}" alt="Render de la base del brazo robótico" loading="lazy">
+		<figcaption>Base (base.png)</figcaption>
+	</figure>
+	<figure>
+		<img src="{{ '/assets/brazo_3d/tapa_base.png' | relative_url }}" alt="Render de la tapa de la base" loading="lazy">
+		<figcaption>Tapa de la base (tapa_base.png)</figcaption>
+	</figure>
+	<figure>
+		<img src="{{ '/assets/brazo_3d/primerservo.png' | relative_url }}" alt="Render del soporte del primer servo" loading="lazy">
+		<figcaption>Soporte del primer servo (primerservo.png)</figcaption>
+	</figure>
+	<figure>
+		<img src="{{ '/assets/brazo_3d/Joint1.png' | relative_url }}" alt="Render de la pieza Joint1" loading="lazy">
+		<figcaption>Joint1 (Joint1.png)</figcaption>
+	</figure>
+	<figure>
+		<img src="{{ '/assets/brazo_3d/joint2.png' | relative_url }}" alt="Render de la pieza joint2" loading="lazy">
+		<figcaption>Joint2 (joint2.png)</figcaption>
+	</figure>
+	<figure>
+		<img src="{{ '/assets/brazo_3d/griper1_Joint3.png' | relative_url }}" alt="Render de la primera pieza de la pinza, correspondiente a Joint3" loading="lazy">
+		<figcaption>Primera pieza de la pinza (griper1_Joint3.png)</figcaption>
+	</figure>
+	<figure>
+		<img src="{{ '/assets/brazo_3d/griper2.png' | relative_url }}" alt="Render de la segunda pieza de la pinza" loading="lazy">
+		<figcaption>Segunda pieza de la pinza (griper2.png)</figcaption>
+	</figure>
+</div>
 
 ### Ensamble CAD y render general
 
@@ -44,6 +69,11 @@ En la revisión del ensamble se comprobará que:
 - Las piezas coincidan en sus puntos de unión y no haya interferencias.
 - Los actuadores y elementos de sujeción tengan espacio para montarse.
 - El movimiento previsto no provoque colisiones entre las piezas.
+
+<figure class="robot-arm-assembly">
+	<img src="{{ '/assets/brazo_3d/ensamble_3d.png' | relative_url }}" alt="Render del ensamble completo del brazo robótico" loading="lazy">
+	<figcaption>Ensamble 3D completo (ensamble_3d.png)</figcaption>
+</figure>
 
 Carpeta propuesta: `assets/files/brazo-3d/ensamble/`.
 
