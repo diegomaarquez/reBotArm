@@ -37,7 +37,7 @@ nav_order: 7
 
 El diseño representa un brazo robótico de tres grados de libertad cuyo extremo incorpora una pinza. Su función prevista es posicionar ese extremo mediante articulaciones y sujetar objetos con la pinza. El material disponible documenta el modelado geométrico y las piezas mediante renders CAD; las imágenes no son registros de un prototipo físico.
 
-La organización responde a cuatro requisitos funcionales visibles en el diseño: sostener el conjunto sobre una base, enlazar las articulaciones, disponer de un soporte para el accionamiento y terminar en una pinza de dos partes. Los renders no incluyen cotas, escala, especificación de materiales ni cargas admisibles; por ello se describe la disposición sin atribuirle valores dimensionales no disponibles.
+La organización responde a cuatro requisitos funcionales visibles en el diseño: sostener el conjunto sobre una base, enlazar las articulaciones, disponer de un soporte para el accionamiento y terminar en una pinza de dos partes. La propuesta organiza los componentes alrededor de una base, enlaza las articulaciones mediante sus soportes y sitúa una pinza de dos partes en el extremo.
 
 ### Organización funcional
 
@@ -83,23 +83,23 @@ El esquema identifica la relación mecánica. No define controlador, alimentaci�
 ## Componentes y manufactura mecánica
 {: #impresion-3d }
 
-Las siete vistas de componente y el render general permiten describir las piezas y el orden funcional. La cantidad de la tabla indica cuántas representaciones de cada elemento aparecen en las imágenes, no una lista de compra ni un despiece verificado del ensamble.
+Las siete vistas de componente y el render general permiten describir las piezas y su orden funcional.
 
-| Elemento visible | Representaciones | Función en la disposición | Material y dimensiones |
-|---|---:|---|---|
-| Base (`base.png`) | 1 | Apoyo del conjunto | No indicados en el render |
-| Tapa (`tapa_base.png`) | 1 | Cierre o cubierta de la base | No indicados en el render |
-| Soporte (`primerservo.png`) | 1 | Interfaz representada para un servo | No se indica modelo de servo, material o medida |
-| Joint1 (`Joint1.png`) | 1 | Elemento de articulación | No indicados en el render |
-| Joint2 (`joint2.png`) | 1 | Elemento de articulación | No indicados en el render |
-| Pieza de pinza (`griper1_Joint3.png`) | 1 | Primera parte del extremo | No indicados en el render |
-| Pieza de pinza (`griper2.png`) | 1 | Segunda parte del extremo | No indicados en el render |
+| Elemento | Cantidad representada | Función en el conjunto |
+|---|---:|---|
+| Base (`base.png`) | 1 | Apoyo del brazo |
+| Tapa (`tapa_base.png`) | 1 | Cierre de la base |
+| Soporte (`primerservo.png`) | 1 | Montaje del primer servo |
+| Joint1 (`Joint1.png`) | 1 | Componente articulado |
+| Joint2 (`joint2.png`) | 1 | Componente articulado |
+| Pieza de pinza (`griper1_Joint3.png`) | 1 | Primera mordaza del extremo |
+| Pieza de pinza (`griper2.png`) | 1 | Segunda mordaza del extremo |
 
-El conjunto contiene tres grados de libertad según la descripción del proyecto. En las vistas individuales se reconocen dos piezas Joint y dos partes de pinza; los renders no permiten asignar con certeza un actuador, una unión específica o una cantidad de tornillos a cada eje. Por ese motivo, el inventario se limita a las piezas gráficas identificables y no estima componentes comerciales.
+El conjunto se describe como un brazo de tres grados de libertad. Las piezas se disponen desde la base, a través de las articulaciones, hasta el extremo con pinza.
 
 ### Vistas de componentes
 
-Los siguientes renders muestran las piezas modeladas de forma individual. Son vistas ilustrativas: no tienen cotas ni escala de fabricación.
+Los siguientes renders muestran la forma de cada pieza por separado y complementan la vista general del ensamble.
 
 <div class="robot-arm-gallery-toolbar">
 	<p>Explora los componentes <span data-gallery-count>07 piezas</span></p>
