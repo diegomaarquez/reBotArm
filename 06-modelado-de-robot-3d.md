@@ -28,63 +28,54 @@ nav_order: 7
 	<a href="#corte-laser"><span>02</span><strong>Corte de lámina</strong><small>CNC láser · diseño en 2D</small><b aria-hidden="true">↘</b></a>
 </nav>
 
-## Planteamiento y organización del diseño
+## Propósito y criterios del diseño
 {: #planteamiento }
 
-El proyecto desarrolla el modelo CAD de un brazo robótico de tres grados de libertad. El propósito documentado es definir la forma y relación de sus componentes y preparar dos posibilidades de fabricación: piezas volumétricas por impresión 3D y perfiles planos para corte láser CNC. El modelo y sus renders describen el diseño; por sí solos no prueban que exista un prototipo físico funcional.
+El diseño representa un brazo robótico de tres grados de libertad cuyo extremo incorpora una pinza. Su función prevista es posicionar ese extremo mediante articulaciones y sujetar objetos con la pinza. El trabajo presentado se centra en el modelado geométrico de las piezas y el ensamble CAD, además de explorar su adaptación a impresión 3D y corte láser.
 
-Como criterios de diseño se consideran la unión coherente de las piezas, el espacio para montar los elementos de accionamiento, la ausencia de interferencias en el movimiento previsto y la preparación de geometrías fabricables. No se han incorporado cotas, cargas, recorridos, materiales definitivos ni requisitos de precisión, por lo que esos valores deben confirmarse en los archivos CAD antes de fabricar.
+Los criterios de diseño son organizar los componentes alrededor de una base, relacionar las articulaciones en una cadena mecánica, disponer de un soporte para el accionamiento y formar una pinza con dos partes. Para pasar del modelo visual a una fabricación repetible se requieren cotas y especificaciones del CAD; por eso esta página describe la configuración y no asigna dimensiones ni materiales que no aparecen en los recursos gráficos.
 
-### Esquema funcional
+### Organización funcional
 
 ```text
-Órdenes de operación (por definir)
-                 ↓
-Controlador y alimentación (por seleccionar/documentar)
-                 ↓
-Elementos de accionamiento (por identificar)
-                 ↓
-Base → articulaciones → eslabones → extremo con pinza
-                 ↓
-      Movimiento del brazo (por verificar)
+Órdenes de movimiento
+        ↓
+Accionamiento de las articulaciones
+        ↓
+Base → Joint1 → Joint2 → extremo con pinza
+        ↓
+Posicionamiento y sujeción del objeto
 ```
 
-El esquema resume los bloques que deberá reunir una versión funcional, no una conexión electrónica ya construida. Las piezas visibles en el modelo incluyen la base, su tapa, un soporte de servo, dos componentes denominados `Joint` y dos partes de la pinza.
+El esquema expresa la relación mecánica y la función general del brazo; no representa un circuito ni un control electrónico concreto. En los renders se identifican la base, su tapa, un soporte de servo, las piezas `Joint1` y `joint2`, y las dos partes de la pinza.
 
-### Representación inicial y alternativas de fabricación
+### Alternativas de fabricación y criterio de selección
 
-El render general y las vistas individuales disponibles permiten reconocer la forma propuesta, pero no hay bocetos preliminares independientes en los archivos del proyecto. Se añadirán cuando estén disponibles para mostrar la evolución del concepto y la disposición inicial de sus componentes.
+| Ruta | Geometría apropiada | Consideración de diseño |
+|---|---|---|
+| Impresión 3D | Base, soportes, articulaciones y piezas con volumen | Permite integrar formas y alojamientos en una pieza; la orientación y el material influyen en la resistencia. |
+| Corte láser CNC | Perfiles planos cortados desde una lámina | Requiere diseñar contornos 2D y uniones compatibles con el espesor y el ancho de corte. |
 
-Las dos rutas de fabricación responden a geometrías distintas. La impresión 3D permite producir componentes volumétricos y soportes con formas que no se obtienen directamente de una lámina; el corte láser es apropiado para perfiles planos y requiere definir material y espesor. En esta etapa se documentan ambas como alternativas de diseño, no como versiones fabricadas ni como una selección final. La decisión deberá contrastar geometría, resistencia, disponibilidad del proceso y compatibilidad de uniones.
+El modelo tridimensional es la representación de referencia porque permite visualizar el volumen y la relación espacial de las piezas. La impresión 3D es la ruta más directa para reproducir componentes volumétricos; el corte láser se mantiene como una alternativa que exige rediseñar las piezas para construcción en lámina. La selección describe la adecuación geométrica de cada proceso y no afirma que se haya fabricado una versión.
 
 ## 1. Brazo modelado en 3D para impresión 3D
 {: #impresion-3d }
 
 Esta alternativa comprende el modelado de las piezas y el ensamble del brazo en 3D con Autodesk Inventor, para fabricar sus componentes mediante impresión 3D.
 
-### Componentes y dimensiones por verificar
+### Componentes representados
 
-La geometría de referencia disponible se distribuye en las siguientes piezas. Las imágenes son renders CAD; las dimensiones y especificaciones deben recuperarse de los modelos y planos editables antes de fabricar.
+Las vistas disponibles muestran siete componentes distintos:
 
-| Archivo de referencia | Elemento identificado | Cantidad de diseño | Dimensiones y material |
-|---|---|---:|---|
-| `base.png` | Base | 1 | Pendientes de confirmar en CAD |
-| `tapa_base.png` | Tapa de la base | 1 | Pendientes de confirmar en CAD |
-| `primerservo.png` | Soporte del primer servo | 1 | Pendientes de confirmar en CAD |
-| `Joint1.png` | Articulación Joint1 | 1 | Pendientes de confirmar en CAD |
-| `joint2.png` | Articulación Joint2 | 1 | Pendientes de confirmar en CAD |
-| `griper1_Joint3.png` | Primera pieza de la pinza | 1 | Pendientes de confirmar en CAD |
-| `griper2.png` | Segunda pieza de la pinza | 1 | Pendientes de confirmar en CAD |
+1. **Base:** soporte inferior y referencia de montaje del brazo.
+2. **Tapa de la base:** pieza complementaria que cubre o cierra la base.
+3. **Soporte del primer servo:** interfaz mecánica representada para alojar el accionamiento.
+4. **Joint1:** componente de la primera articulación.
+5. **Joint2:** componente de la segunda articulación.
+6. **Primera pieza de la pinza:** elemento asociado al extremo `Joint3`.
+7. **Segunda pieza de la pinza:** elemento que completa la pinza en el modelo.
 
-La cantidad corresponde a la configuración representada por cada archivo, no a una lista de compra final. No se han especificado dimensiones globales del brazo, servos, tornillería, insertos ni otros elementos comerciales; se incorporarán al inventario cuando se confirme el ensamble.
-
-### Planos de las piezas
-
-Se publicará un plano por cada pieza fabricada, con las vistas y cotas necesarias para definir su geometría, unidades, material y escala. Los nombres de pieza coincidirán con los del proyecto de Inventor.
-
-Carpeta propuesta: `assets/files/brazo-3d/planos/`.
-
-Los planos se publicarán en PDF para consulta. Se conservarán también los dibujos editables de Inventor (`.idw` o `.dwg`) y las piezas (`.ipt`).
+Este inventario describe los elementos identificables en los renders y no incluye fijaciones, motores ni componentes comerciales, que no se muestran de forma verificable.
 
 ### Imágenes de las piezas
 
@@ -145,38 +136,11 @@ Los siguientes renders muestran las piezas modeladas. Las dimensiones de fabrica
 	</figure>
 </div>
 
-### Ensamble CAD y render general
+### Ensamble y lectura del modelo
 
-El ensamble completo reunirá los componentes y piezas del brazo en Autodesk Inventor. Se documentará con el archivo de ensamble (`.iam`), una captura del árbol de componentes y un render general cuando estén disponibles.
+El render general presenta las piezas en su disposición de brazo: la base sirve de soporte; el soporte del servo y las articulaciones forman la cadena que alcanza el extremo; y las dos piezas de la pinza aparecen al final. Las vistas individuales permiten observar la geometría de cada componente por separado. En conjunto, ambas representaciones comunican la forma y organización del diseño.
 
-En la revisión del ensamble se comprobará que:
-
-- Las tres articulaciones estén representadas con restricciones coherentes con sus grados de libertad.
-- Las piezas coincidan en sus puntos de unión y no haya interferencias.
-- Los actuadores y elementos de sujeción tengan espacio para montarse.
-- El movimiento previsto no provoque colisiones entre las piezas.
-
-El archivo de ensamble y el árbol de componentes todavía no están disponibles para comprobar estos puntos. También falta precisar qué articulación corresponde a cada eje, el tipo y cantidad de actuadores, sus interfaces de montaje y el mecanismo de apertura de la pinza.
-
-Carpeta propuesta: `assets/files/brazo-3d/ensamble/`.
-
-### Modelo 3D manipulable
-
-El ensamble se exportará en STL para visualizarlo en esta página y en STEP para facilitar el intercambio CAD.
-
-Carpeta propuesta para el modelo: `assets/3d/brazo-3d/`.
-
-Los archivos del brazo todavía no están en el repositorio; el visor se añadirá cuando se incorpore el STL. El archivo `assets/3d/g.stl` corresponde a la PCB y no al brazo robótico.
-
-### Entregables para impresión 3D
-
-- [ ] Piezas de Inventor (`.ipt`) y ensamble editable (`.iam`).
-- [ ] Planos PDF de las piezas.
-- [ ] Exportaciones STL para impresión y STEP para intercambio CAD.
-- [ ] Renders individuales y del brazo ensamblado.
-- [ ] Inventario final con cantidades, materiales, dimensiones y referencias de compra de elementos comerciales.
-- [ ] Registro por pieza de material, impresora, parámetros, archivo utilizado y ajustes efectuados.
-- [ ] Fotografías del prototipo terminado que permitan identificar sus componentes.
+La comprobación dimensional de las uniones, holguras, recorridos y posibles interferencias corresponde al modelo CAD editable. Los renders permiten una revisión visual general, pero no bastan para validar tolerancias ni movimiento real.
 
 ## 2. Brazo modelado en 2D para corte láser CNC
 {: #corte-laser }
