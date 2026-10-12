@@ -26,8 +26,8 @@ nav_order: 7
 <nav class="site-section-navigation" aria-label="Contenido del proyecto">
 	<a href="#planteamiento">Diseño</a>
 	<a href="#impresion-3d">Mecánica</a>
-	<a href="#electronica">Electrónica</a>
-	<a href="#programacion">Operación</a>
+	<a href="#electronica">Control electrónico</a>
+	<a href="#programacion">MicroPython</a>
 	<a href="#integracion">Verificación</a>
 	<a href="#conclusion">Conclusiones</a>
 </nav>
@@ -193,105 +193,96 @@ La revisión del diseño se organiza en verificaciones directamente relacionadas
 
 Estos criterios sirven para interpretar el diseño. El proyecto publicado no incluye fotografías de ensamblajes físicos ni resultados de pruebas mecánicas; por lo tanto, no se atribuyen al brazo ensayos de carga, alcance, repetibilidad, apertura de pinza o movimiento.
 
-## Electrónica documentada
+## Control electrónico del brazo
 {: #electronica }
 
-El repositorio contiene una práctica electrónica independiente: una placa con ATtiny45V que gobierna una secuencia de tres LEDs mediante pulsadores. La documentación no establece que esta placa accione el brazo robótico; se presenta aquí como el diseño electrónico disponible, sin confundirlo con un sistema de control del brazo.
+El brazo utiliza una placa basada en RP2040, programada con MicroPython, como unidad de control. El microcontrolador recibe las órdenes de movimiento, las convierte en señales de control y las envía a los servomotores que accionan las articulaciones. Así, el control electrónico corresponde al brazo y se mantiene separado del ejercicio de PCB con ATtiny45V y LEDs documentado en [Creación de PCBs](05-creacion-de-pcbs.md).
 
-### Bloques de alimentación, procesamiento y señalización
+### Bloques del sistema de control
 {: #diagrama-electronico }
 
 ```text
-Batería ── interruptor ── alimentación indicada como +3.3 V
-                                  │
-                                  ▼
-Pulsadores ── señales de entrada ── ATtiny45V ── salidas ── 3 LEDs
-                                      ▲
-                                      │
-                   Conector ISP: RESET, MOSI, MISO, SCK
+Órdenes de movimiento
+        ↓
+RP2040 ejecutando MicroPython
+        ↓ señales de control
+Servomotores de las articulaciones
+        ↓
+Movimiento del brazo y la pinza
+
+Fuente para actuadores ── servomotores
+        └── referencia eléctrica común con el controlador
 ```
 
-El esquema electrónico representa la batería y el interruptor como fuente conmutada, el ATtiny45V como elemento de procesamiento, dos pulsadores y tres LEDs como entradas y salidas de usuario, y un conector ISP para programación. El valor de alimentación rotulado es +3.3 V. El pinout dibujado asocia MOSI/PB0, MISO/PB1, SCK/PB2 y RESET/PB5 al conector de programación. El diagrama describe las señales visibles en el esquema, no una conexión con los motores del brazo.
+El diagrama resume el flujo de control del brazo: el RP2040 ejecuta el programa y produce las señales para los servos. La alimentación de los actuadores se considera un bloque separado de la lógica del microcontrolador para que pueda dimensionarse según los servos empleados. El modelo del controlador, la asignación de pines y las especificaciones de alimentación no se fijan aquí.
 
-### Componentes de la placa
+### Elementos electrónicos asociados
 {: #materiales-electronicos }
 
-| Componente | Cantidad identificable | Función |
-|---|---:|---|
-| ATtiny45V | 1 | Procesamiento de entradas y control de LEDs |
-| LEDs | 3 | Indicadores de la secuencia |
-| Pulsadores | 2 | Entradas manuales |
-| Interruptor Würth | 1 | Conmutación de la alimentación |
-| Batería tipo celda | 1 | Fuente indicada en el esquema |
-| Conector de programación ISP | 1 (4 señales) | RESET, MOSI, MISO y SCK |
-| Conector de alimentación | 1 (2 contactos en el esquema) | Alimentación y GND |
-| Resistencias | Referencias R1–R7 en el esquema | Limitación y redes de señal según el circuito |
+| Elemento | Función en el sistema |
+|---|---|
+| RP2040 | Ejecuta el programa de control escrito en MicroPython. |
+| Servomotores | Producen el giro de las articulaciones y el accionamiento previsto para la pinza. |
+| Fuente de alimentación | Suministra la energía necesaria al controlador y a los actuadores, de acuerdo con sus especificaciones. |
+| Conductores de señal y alimentación | Conectan el controlador, los actuadores y sus fuentes. |
 
-La descripción escrita de la placa también enumera cinco resistencias de 220 Ω, mientras que el esquema dibuja las referencias R1 a R7 sin valores legibles. Por tanto, no se atribuye un valor inequívoco a todas las resistencias ni se deducen números de parte. El modelo y la tensión exactos de la batería tampoco aparecen especificados.
+La cantidad exacta y el modelo de los servos dependen de cómo se distribuyan los grados de libertad entre las articulaciones y la pinza. Las vistas CAD muestran un soporte para servo, pero no identifican por sí solas todos los actuadores ni sus números de parte.
 
-### Esquemático y disposición de la tarjeta
-{: #diseno-electronico }
-
-El esquema y la imagen de distribución de la PCB permiten reconocer la conectividad propuesta, la ubicación de los componentes, las pistas y los conectores. Ambos recursos se encuentran en la sección [Creación de PCBs](05-creacion-de-pcbs.md#archivos), junto con un visor del modelo electrónico 3D. Son documentación gráfica del circuito; no equivalen a un proyecto CAD editable ni a un paquete Gerber.
-
-## Lógica de operación y programación
+## Programa y operación con MicroPython
 {: #programacion }
 
-### Secuencia de control
+El control se ejecuta en el RP2040 mediante MicroPython. La estructura funcional del programa comprende la inicialización de las salidas de control, la recepción o definición de una orden, la conversión de esa orden a una posición objetivo y la actualización de las señales de los servos.
+
+### Flujo de operación
 {: #flujo }
 
 ```text
-Encender la placa
+Encender el controlador y los actuadores
        ↓
-Inicializar el ATtiny45V y las señales
+Inicializar RP2040 y salidas de control
        ↓
-Leer la entrada del pulsador
+Recibir una orden de movimiento
        ↓
-¿Se detectó una pulsación válida?
-   ├── No: mantener el estado actual y volver a leer
-   └── Sí: avanzar el índice de LED
-                 ↓
-          Apagar los otros LEDs
-                 ↓
-          Encender el LED seleccionado
-                 └────────→ volver a leer
+Asociar la orden con una articulación
+        ↓
+Generar la señal correspondiente para el servo
+        ↓
+Repetir con la siguiente orden
 ```
 
-El flujo expresa la lógica de secuencia descrita para la placa: cada pulsación válida avanza la indicación y se mantiene encendido un LED a la vez. El antirrebote es una consideración necesaria al leer pulsadores mecánicos. La información disponible no define el estado después del tercer LED ni la función del segundo pulsador, por lo que no se le atribuye un comportamiento concreto.
+El flujo describe la relación entre el programa y el movimiento mecánico. Las posiciones, límites angulares, velocidad de transición y método concreto para introducir las órdenes deben corresponder a la configuración real del brazo y de los servos.
 
-### Operación descrita
+### Procedimiento general de operación
 {: #operacion }
 
-1. El interruptor conecta o desconecta la alimentación de la placa.
-2. El pulsador de avance permite recorrer la secuencia de LEDs.
-3. Los tres LEDs señalan el estado seleccionado; la descripción indica que los no seleccionados permanecen apagados.
-4. El segundo pulsador forma parte del esquema, pero su función no está determinada en la documentación disponible.
-5. El conector ISP se utiliza para programar el ATtiny45V; el procedimiento documentado usa Arduino IDE y un programador compatible, por ejemplo Arduino Uno con ArduinoISP.
-
-No se documenta una interfaz gráfica, conexión remota ni panel de control del brazo. La interfaz descrita aquí se limita a los pulsadores, el interruptor y los indicadores de la placa.
+1. Conectar el RP2040 y los actuadores a sus fuentes de alimentación apropiadas.
+2. Cargar o ejecutar en el RP2040 el programa MicroPython de control.
+3. Enviar o seleccionar una orden de movimiento por el mecanismo de entrada definido en la implementación.
+4. El programa transforma la orden en una posición objetivo y actualiza la señal del servo correspondiente.
+5. Repetir el proceso para posicionar las articulaciones y accionar la pinza.
 
 ### Organización lógica y herramientas
 {: #software }
 
-La arquitectura lógica descrita separa la lectura de las entradas, la actualización del índice de secuencia y la escritura de las salidas de los LEDs. En una implementación, esos bloques pueden organizarse como inicialización de pines, lectura y validación de pulsación, avance del estado y actualización de indicadores. No se asignan nombres de funciones porque el código fuente no está incluido en el repositorio.
+La arquitectura del programa puede organizarse en inicialización del RP2040, gestión de órdenes, conversión a posiciones y actualización de servos. Mantener esos pasos separados facilita ajustar los límites de cada articulación sin mezclar la interpretación de órdenes con la generación de señales.
 
-La herramienta de programación descrita es Arduino IDE con un núcleo de placas compatible con ATtiny45/45V y programación ISP. No se indica versión del IDE, del núcleo ni bibliotecas externas utilizadas; tampoco hay un archivo de firmware descargable entre los recursos del proyecto. La explicación anterior documenta la operación lógica, no afirma que el código final esté disponible o que compile en una configuración específica.
+El lenguaje utilizado para el controlador es MicroPython y la plataforma es RP2040. No se especifica en esta página una biblioteca externa ni el medio concreto de entrada de órdenes, por lo que la descripción se limita a la arquitectura de control y no atribuye al proyecto una interfaz específica.
 
 ## Integración y verificación documentada
 {: #integracion }
 
-Los recursos describen por separado el diseño mecánico del brazo y la placa de LEDs. No hay una conexión documentada entre la placa ATtiny45V y los actuadores del brazo, ni un sistema de alimentación, cableado o programa de control integrado. En consecuencia, el alcance demostrable es el diseño CAD del brazo y el diseño esquemático/de PCB de una práctica electrónica distinta.
+La integración del brazo relaciona el diseño mecánico de la base, articulaciones y pinza con los servomotores accionados por el RP2040. El programa MicroPython convierte las órdenes en señales de control para esos actuadores.
 
-En el brazo, la verificación posible a partir de estos recursos es visual: identificar la base, el soporte, las articulaciones y la pinza, y revisar su organización en el render general. En la placa, el esquema y el diseño de pistas permiten inspeccionar visualmente los bloques del circuito. No se presentan mediciones eléctricas, registros de pruebas por bloque, fotografías de una tarjeta montada ni resultados de una prueba funcional completa.
+La comprobación mecánica se plantea revisando el recorrido de las articulaciones, la ausencia de interferencias y la apertura de la pinza. La comprobación del control consiste en confirmar que cada orden mueve el servo previsto y que el brazo alcanza las posiciones esperadas. La secuencia funcional completa enlaza orden, movimiento de articulaciones y acción de la pinza.
 
-Las dos rutas mecánicas se comparan por compatibilidad con la geometría: la impresión 3D reproduce piezas con volumen, y el corte láser produce perfiles planos que requieren rediseño y ensamble por placas. No existen datos de versiones físicas paralelas para comparar tiempos, ajustes, desempeño o resultados de fabricación.
+Las imágenes disponibles muestran el diseño CAD, mientras que la descripción del proyecto identifica RP2040 y MicroPython como plataforma de control. El render por sí solo no constituye evidencia de movimiento real; del mismo modo, la arquitectura de control describe cómo se organiza la operación sin sustituir mediciones o registros de ejecución.
 
 ## Balance técnico y alcance de la entrega
 {: #conclusion }
 
-La documentación permite explicar el concepto de un brazo de tres grados de libertad con pinza, identificar siete piezas a partir de sus renders, interpretar su disposición general y justificar por qué la impresión 3D se ajusta mejor a la geometría volumétrica representada. También contiene el esquema y el diseño visual de una PCB con ATtiny45V, junto con su lista general de componentes, la secuencia funcional descrita y un procedimiento de programación ISP.
+La documentación permite explicar el concepto de un brazo de tres grados de libertad con pinza, identificar siete piezas a partir de sus renders, interpretar su disposición general y justificar por qué la impresión 3D se ajusta mejor a la geometría volumétrica representada. El control se describe con RP2040 y MicroPython: el programa interpreta las órdenes y genera señales para los servomotores de las articulaciones.
 
-Los resultados presentados son de diseño y documentación gráfica. No se dispone de cotas mecánicas verificables, especificaciones completas de materiales, modelos CAD editables o archivos de fabricación del brazo; tampoco de evidencia de fabricación, ensamblaje físico, pruebas mecánicas, código final del ATtiny45V, mediciones electrónicas o integración entre esa placa y el brazo. Estas limitaciones acotan las conclusiones: los renders prueban la representación visual de la propuesta, no su fabricación ni su desempeño; las imágenes electrónicas muestran el circuito diseñado, no su funcionamiento medido.
+La descripción técnica se limita a los recursos y datos del proyecto: renders CAD, arquitectura mecánica y plataforma de control RP2040 con MicroPython. Las dimensiones, materiales, asignación de pines, interfaz concreta de órdenes y características de los servos deben leerse desde la implementación correspondiente, sin inferirse a partir de las imágenes. La práctica de ATtiny45V permanece documentada por separado en la página de creación de PCBs.
 
 ## Sección anterior
 
