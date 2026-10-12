@@ -145,75 +145,55 @@ La comprobación dimensional de las uniones, holguras, recorridos y posibles int
 ## 2. Brazo modelado en 2D para corte láser CNC
 {: #corte-laser }
 
-Esta alternativa reunirá los perfiles planos de las piezas del brazo, dibujados en Autodesk Inventor para su fabricación mediante corte láser CNC. Los archivos se prepararán según las unidades y requisitos del equipo o servicio de corte; se indicarán el material y el espesor cuando estén definidos.
-
-### Planos y archivos de corte
-
-Cada pieza se identificará con su nombre y tendrá las dimensiones necesarias para fabricarla. Se incluirán los archivos editables de Inventor y una exportación vectorial compatible con el equipo de corte, por ejemplo DXF o DWG. El PDF servirá como referencia visual y de cotas.
-
-Carpeta propuesta: `assets/files/brazo-2d/corte-laser/`.
-
-Los planos y archivos de corte se incorporarán aquí cuando estén preparados en Inventor.
+El corte láser es una opción de fabricación para piezas de perfil plano. La geometría tridimensional del brazo no se convierte directamente en piezas de lámina: cada componente debe representarse como un contorno 2D y sus uniones deben diseñarse de acuerdo con el espesor del material. Esta ruta es adecuada para placas laterales, soportes y perfiles; la base, la tapa y la pinza requerirían adaptar su forma o combinar varias placas para obtener volumen.
 
 <div class="robot-arm-process" aria-label="Flujo de fabricación CNC">
-	<div><span>01</span><strong>Dibujo 2D</strong><small>Geometría de cada pieza</small></div>
-	<div><span>02</span><strong>Preparación CAD</strong><small>Exportación DXF o DWG</small></div>
-	<div><span>03</span><strong>Corte CNC</strong><small>Fabricación en lámina</small></div>
+	<div><span>01</span><strong>Definir perfiles</strong><small>Seleccionar vistas planas de cada pieza</small></div>
+	<div><span>02</span><strong>Preparar el corte</strong><small>Distribuir contornos y compensar el ancho de corte</small></div>
+	<div><span>03</span><strong>Ensamblar placas</strong><small>Unir perfiles para reconstruir la estructura</small></div>
 </div>
 
-### Vistas del diseño 2D
+La fabricación por láser favorece perfiles repetibles y un montaje por placas, pero limita las formas a superficies planas y hace que las uniones dependan del espesor, el ajuste entre piezas y la fijación. La impresión 3D representa de forma más directa las geometrías volumétricas visibles en el modelo.
 
-Se añadirán imágenes de las piezas y de su distribución en el material para mostrar el diseño preparado para corte.
+## Secuencia mecánica representada
+{: #ensamble }
 
-Carpeta propuesta: `assets/img/brazo-2d/corte-laser/`.
+El orden funcional que comunica el diseño se puede resumir así:
 
-### Entregables para corte láser CNC
+```text
+Base y tapa
+    ↓
+Soporte del servo y articulación inicial
+    ↓
+Articulación siguiente
+    ↓
+Extremo con dos piezas de pinza
+```
 
-- [ ] Diseño editable de las piezas en Autodesk Inventor.
-- [ ] Archivos de corte vectoriales (DXF o DWG, según el equipo disponible).
-- [ ] Planos PDF con cotas, unidades, material y espesor definidos.
-- [ ] Imágenes de las piezas y de su distribución para corte.
+La secuencia describe la relación general que se aprecia entre las familias de piezas, no un instructivo de montaje con fijaciones específicas. En una construcción mecánica, el montaje parte de la base, continúa por los soportes y articulaciones, y termina en el extremo; cada unión debe permitir el giro previsto sin que las piezas colisionen.
 
-Los archivos del brazo aún no están en el repositorio. Las carpetas y tablas de esta página organizan los entregables pendientes.
+## Criterios de revisión mecánica
+{: #revision }
 
-### Preparación, montaje y comprobación mecánica
+La revisión del diseño se organiza en verificaciones directamente relacionadas con la geometría:
 
-Para cada ruta de fabricación se registrarán la versión del diseño, el material y espesor, la máquina o servicio, los parámetros relevantes, el archivo enviado y los ajustes realizados. En la ruta láser también se anotarán las tolerancias de ranuras y uniones que deban ajustarse al kerf del equipo.
+| Aspecto | Comprobación de diseño |
+|---|---|
+| Unión | Las superficies y puntos de montaje de piezas consecutivas deben coincidir. |
+| Movimiento | Cada articulación debe tener libertad para su giro previsto y limitar movimientos no deseados. |
+| Interferencias | El recorrido de las piezas no debe atravesar la base, los soportes ni otros eslabones. |
+| Accionamiento | El soporte representado debe alojar el actuador y permitir transmitir movimiento a la articulación. |
+| Pinza | Las dos piezas del extremo deben aproximarse y separarse para sujetar un objeto. |
+| Fabricabilidad | El espesor, orientación, uniones y geometría deben ser compatibles con el proceso elegido. |
 
-Como guía de montaje inicial, sujeta a revisión con el ensamble real:
+Estos criterios sirven para interpretar y revisar el modelo. La apariencia de un render no constituye una medición de holgura, resistencia o capacidad de carga.
 
-1. Identificar las piezas y comprobarlas frente a sus planos.
-2. Montar la base y su tapa, verificando el espacio para fijaciones y accionamiento.
-3. Fijar los soportes y unir las articulaciones en el orden definido por el ensamble CAD.
-4. Instalar las dos piezas de la pinza y revisar su alineación.
-5. Comprobar manualmente el recorrido de cada unión y corregir roces antes de energizar actuadores.
+## Alcance y conclusión
+{: #conclusion }
 
-El orden definitivo, las fijaciones y las fotografías paso a paso se completarán cuando se disponga de un prototipo. No hay evidencia de fabricación, ensamblaje físico ni resultados de pruebas mecánicas en los archivos actuales.
+El material visual documenta una propuesta mecánica reconocible: base, soporte de accionamiento, articulaciones y pinza. La combinación de la vista general con los renders individuales permite explicar la organización del brazo y distinguir las piezas que lo componen. El modelo tridimensional es el medio más apropiado para comunicar su volumen, mientras que el corte láser representa una adaptación alternativa a perfiles planos.
 
-### Criterios para pruebas mecánicas
-
-Una vez fabricado el brazo, se registrará para cada articulación su movimiento observado, posibles interferencias, holguras, estabilidad de las uniones y ajustes requeridos. También se probará la apertura y cierre de la pinza si su mecanismo y accionamiento están definidos. Se anotarán el método, las condiciones, el resultado y cualquier limitación; estas pruebas aún no se han realizado o documentado.
-
-## Electrónica, control y operación
-{: #control }
-
-La placa descrita en [Creación de PCBs](05-creacion-de-pcbs.md) controla una secuencia de LEDs con un ATtiny45V; la información disponible no establece que sea el controlador del brazo. Para documentar una futura integración se necesitarán el diagrama de bloques de la electrónica del robot, esquema editable, lista de componentes con valores y referencias, diseño de tarjeta y archivos de fabricación, además de evidencias de montaje y verificaciones eléctricas por bloques.
-
-Tampoco se han encontrado en este proyecto el programa de control del brazo, una interfaz de operación ni una lista de dependencias de software. Para completar esa parte se deberá identificar el controlador y sus conexiones, describir el flujo desde las órdenes hasta el movimiento, adjuntar el diagrama de ejecución, explicar las funciones principales y entregar el código correspondiente con instrucciones para compilarlo y ejecutarlo. Los modos de operación, controles y parámetros de acceso se documentarán cuando se definan; no se presuponen en esta página.
-
-## Integración y validación del sistema
-{: #validacion }
-
-La evaluación de una versión funcional debe abarcar el montaje físico de actuadores, alimentación, cableado y controlador; la respuesta del hardware a las órdenes del software; y cada modo de operación previsto. La prueba integral deberá mostrar una secuencia de uso completa con evidencia del prototipo y resultados observados. No se dispone todavía de esos registros ni de versiones físicas que puedan compararse.
-
-Cuando existan versiones fabricadas, se compararán bajo criterios comunes: correspondencia con el CAD, tiempo y dificultad de fabricación, ajustes de montaje, estabilidad, movimiento e incidencias. Se mantendrán separados los resultados de la ruta de impresión 3D y los del corte láser, sin atribuirles pruebas que no se hayan efectuado.
-
-## Estado de la documentación y conclusiones
-{: #estado }
-
-Actualmente están disponibles renders de siete componentes y una imagen del ensamble CAD. Estos recursos respaldan la definición visual del diseño, pero no sustituyen bocetos iniciales, modelos editables, planos acotados, archivos de fabricación, fotos de prototipos ni resultados de pruebas. Los archivos correspondientes a esas evidencias aún no se encuentran en el repositorio.
-
-Por tanto, puede describirse la propuesta geométrica y organizar sus dos rutas de fabricación, pero todavía no se puede concluir que se hayan cumplido dimensiones, resistencia, desempeño, control o integración. La entrega final deberá vincular cada plano, archivo, fotografía y resultado con la versión del brazo a la que pertenece, y registrar los problemas encontrados, las correcciones aplicadas y las limitaciones observadas.
+El alcance de esta página es el diseño geométrico y la comparación conceptual de procesos de fabricación. Las imágenes disponibles no proporcionan cotas, materiales, cargas admisibles ni evidencia de fabricación o funcionamiento, por lo que las conclusiones se limitan a la configuración visual y a criterios de diseño mecánico. La electrónica y el software no se atribuyen al brazo en ausencia de una relación documentada con este modelo.
 
 ## Sección anterior
 
