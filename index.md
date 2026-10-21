@@ -39,5 +39,11 @@ nav_order: 1
 		<span class="site-project-navigation__description">Piezas para impresión 3D y perfiles para corte láser CNC.</span>
 		<span class="site-project-navigation__action">Explorar sección <span aria-hidden="true">↗</span></span>
 	</a>
+	<a href="{{ '/07-proyecto-dum-e/' | relative_url }}">
+		<span class="site-project-navigation__number">03</span>
+		<span class="site-project-navigation__category">PROYECTO FINAL · 6-DOF</span>
+		<strong>D.U.M-E</strong>
+		<span class="site-project-navigation__description">Brazo articulado con transmisión por poleas síncronas, criterios de diseño y presentación integrada.</span>
+		<span class="site-project-navigation__action">Explorar sección <span aria-hidden="true">↗</span></span>
+	</a>
 </nav>
-
