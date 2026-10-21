@@ -63,11 +63,11 @@ La propuesta contempla cubiertas para las correas y los puntos de pellizco, lím
 ## Presentación del proyecto
 {: #presentacion }
 
-El visor de Microsoft Office intenta mostrar la presentación desde el archivo público del sitio. Requiere conexión a internet y que el sitio publicado sea accesible; si el visor no carga, puedes abrir o descargar el archivo directamente.
+El visor de Microsoft Office muestra una copia preparada sin las fuentes incrustadas que provocaban errores al cargarlas. Puede sustituirlas por las fuentes disponibles en el visor; para conservar la presentación original, usa el enlace de descarga. El visor requiere conexión a internet y que el sitio publicado sea accesible.
 
 <div class="responsive-embed">
 	<iframe
-		src="https://view.officeapps.live.com/op/embed.aspx?src={{ '/assets/Dume.pptx' | absolute_url | uri_escape }}"
+		src="https://view.officeapps.live.com/op/embed.aspx?src={{ '/assets/Dume-visor.pptx' | absolute_url | uri_escape }}"
 		title="Presentación del proyecto D.U.M-E"
 		loading="lazy"
 		allowfullscreen>
